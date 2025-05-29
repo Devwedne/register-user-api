@@ -8,3 +8,17 @@ const port = 3000;
 app.listen(port, () => {
   console.log("O servidor está rodando na porta ", +port);
 });
+
+app.post("/users", async (req, res) => {
+  try {
+    const newUser = await prisma.user.create({
+      data: {
+        name: req.body.name,
+        email: req.body.email,
+      },
+    });
+    res.json(newUser);
+  } catch (error) {
+    res.json(error.error);
+  }
+});
