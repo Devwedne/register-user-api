@@ -22,3 +22,12 @@ app.post("/users", async (req, res) => {
     res.json(error.error);
   }
 });
+
+app.get("/users", async (req, res) => {
+  try {
+    const findUser = await prisma.user.findMany();
+    res.json(findUser);
+  } catch (error) {
+    res.json(error.error);
+  }
+});
