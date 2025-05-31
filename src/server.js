@@ -31,3 +31,18 @@ app.get("/users", async (req, res) => {
     res.json(error.error);
   }
 });
+
+app.put("/users/:id", async (req, res) => {
+  try {
+    const updateUser = await prisma.user.update({
+      where: { id: req.params.id },
+      data: {
+        name: req.body.name,
+        email: req.body.email,
+      },
+    });
+    res.json(updateUser);
+  } catch (error) {
+    res.json(error.error);
+  }
+});
