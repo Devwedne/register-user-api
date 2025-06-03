@@ -46,3 +46,14 @@ app.put("/users/:id", async (req, res) => {
     res.json(error.error);
   }
 });
+
+app.delete("/users/:id", async (req, res) => {
+  try {
+    const delectUser = await prisma.user.delete({
+      where: { id: req.params.id },
+    });
+    res.json(delectUser);
+  } catch (error) {
+    res.json(error.error);
+  }
+});
